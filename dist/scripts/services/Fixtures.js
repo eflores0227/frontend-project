@@ -30,17 +30,26 @@
              { title: 'Can you hear me now?', duration: '3:14' },
              { title: 'Wrong phone number', duration: '2:15' }
          ]
-         Fixtures.getAlbum = function() {
+     };
+
+     Fixtures.getAlbum = function() {
            return albumPicasso;
      };
-         Fixtures.getCollection = function() {
-           return [] << albumDetails(12)
 
-         }
+    Fixtures.getCollection = function() {
+      var array = [];
+
+      for(var i =0; i < 12; i++){
+        array.push(albumPicasso);
+      }
+
+      return array;
+
+    };
     return Fixtures;
   }
 
-  angular
-    .module('blocJams')
-    .factory('Fixtures', Fixtures);
+    angular
+      .module('blocJams')
+      .factory('Fixtures', Fixtures);
 })();
