@@ -3,7 +3,7 @@
         <div class="column half">
             <img src="/assets/images/album_covers/01.png" class="album-cover-art">
         </div>
-        <div class="album-view-details column half" ng-repeat= $index>
+        <div class="album-view-details column half" ng-repeat=" album in albums track by $index">
             <h2 class="album-view-title">{{ album.title }}</h2>
             <h3 class="album-view-artist">{{ album.artist }}</h3>
             <h5 class="album-view-release-info">{{ album.year }}</h5>
