@@ -21,16 +21,16 @@
                 <span class="ion-skip-back"></span>
          </div>
          <div class="control-group currently-playing">
-             <h2 class="song-name"></h2>
+             <h2 class="song-name"> {{ song.title }}</h2>
              <h2 class="artist-song-mobile"></h2>
-             <h3 class="artist-name"></h3>
+             <h3 class="artist-name">{{ album.artist }}</h3>
              <div class="seek-control">
                  <div class="seek-bar">
                      <div class="fill"></div>
                      <div class="thumb"></div>
                  </div>
                  <div class="current-time"></div>
-                 <div class="total-time"></div>
+                 <div class="total-time">{{ song.duration }}</div>
              </div>
          </div>
          <div class="control-group volume">
