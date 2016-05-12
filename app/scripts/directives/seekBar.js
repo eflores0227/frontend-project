@@ -53,7 +53,7 @@
 
 
             scope.thumbStyle = function() {
-              return {width: percentString()};
+              return {left: percentString()};
             };
 
             scope.onClickSeekBar = function(event) {
@@ -62,21 +62,21 @@
                 notifyOnChange(scope.value);
             };
 
-            scope.trackThumb = function(event) {
-              alert(event);
-              // $document.bind('mousemove.thumb', function(event){
-              //     var percent = calculatePercent(seekBar, event);
-              //     scope.$apply(function() {
-              //       scope.value = percent * scope.max;
-              //       notifyOnChange(scope.value);
-              //     });
-              // });
-              //
-              //
-              // $document.bind('mouseup.thumb', function() {
-              //     $document.unbind('mousemove.thumb');
-              //     $document.unbind('mouseup.thumb');
-              // });
+            scope.trackThumb = function() {
+              console.log(1);
+              $document.bind('mousemove.thumb', function(event){
+                  var percent = calculatePercent(seekBar, event);
+                  scope.$apply(function() {
+                    scope.value = percent * scope.max;
+                    notifyOnChange(scope.value);
+                  });
+              });
+
+
+              $document.bind('mouseup.thumb', function() {
+                  $document.unbind('mousemove.thumb');
+                  $document.unbind('mouseup.thumb');
+              });
             };
           }
       };
