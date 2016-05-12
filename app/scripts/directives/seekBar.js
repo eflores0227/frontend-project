@@ -1,7 +1,7 @@
 (function() {
     function seekBar($document) {
 
-      var calculatePercent = function(SeekBar, event) {
+      var calculatePercent = function(seekBar, event) {
           var offsetX = event.pageX - seekBar.offset().left;
           var seekBarWidth = seekBar.width();
           var offsetXPercent = offsetX / seekBarWidth;
@@ -9,10 +9,12 @@
           offsetXPercent = Math.min(1, offsetXPercent);
           return offsetXPercent
       };
+
+
       return {
           templateUrl: '/templates/directives/seek_bar.html',
           replace: true,
-          restrict: 'E'
+          restrict: 'E',
           scope: {
               onChange: '&'
           },
@@ -32,13 +34,26 @@
 
             var percentString = function () {
                 var value = scope.value;
-                var max = scope.value;
+                var max = scope.max;
                 var percent = value / max * 100;
                 return percent + "%";
             };
 
+            var notifyOnChange = function(newValue) {
+                if (typeof scope.onChange === 'function') {
+                  alert('up in here girl')
+                  scope.onChange({value: newValue});
+                }
+            };
+
+
             scope.fillStyle = function() {
                 return {width: percentString()};
+            };
+
+
+            scope.thumbStyle = function() {
+              return {width: percentString()};
             };
 
             scope.onClickSeekBar = function(event) {
@@ -47,25 +62,21 @@
                 notifyOnChange(scope.value);
             };
 
-            scope.trackThumb = function() {
-              $document.bind('mousemove.thum', function(event){
-                  var percent = calculatePercent(seekBar, event);
-                  scope.$apply(function() {
-                    scope.value = percent * scope.max;
-                    notifyOnChange(scope.value);
-                });
-              });
-
-              var notifyOnChange = function(newValue) {
-                  if (typeof scope.onChange === 'function') {
-                    scope.onChange({value: newValue});
-                  }
-              };
-
-              $document.bind('mouseup.thumb', function() {
-                  $document.unbind('mousemove.thumb');
-                  $document.unbind('mouseup.thumb');
-              });
+            scope.trackThumb = function(event) {
+              alert(event);
+              // $document.bind('mousemove.thumb', function(event){
+              //     var percent = calculatePercent(seekBar, event);
+              //     scope.$apply(function() {
+              //       scope.value = percent * scope.max;
+              //       notifyOnChange(scope.value);
+              //     });
+              // });
+              //
+              //
+              // $document.bind('mouseup.thumb', function() {
+              //     $document.unbind('mousemove.thumb');
+              //     $document.unbind('mouseup.thumb');
+              // });
             };
           }
       };

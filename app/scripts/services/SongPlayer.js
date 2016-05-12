@@ -2,8 +2,9 @@
   function SongPlayer($rootScope, Fixtures) {
       var SongPlayer = {};
 
+      var currentBuzzObject;
       var currentAlbum = Fixtures.getAlbum();
-      var currentSong = null;
+      SongPlayer.currentSong = null;
 
       var getSongIndex = function(song) {
         return currentAlbum.songs.indexOf(song);
@@ -29,7 +30,7 @@
       var setSong = function(song) {
         if (currentBuzzObject) {
           currentBuzzObject.stop();
-          currentSong.playing = null;
+          SongPlayer.currentSong.playing = null;
         }
 
         currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -48,7 +49,7 @@
 
       var playSong = function(){
         currentBuzzObject.play();
-        currentSong.playing = true
+        SongPlayer.currentSong.playing = true
       }
 
       SongPlayer.play = function(song) {
